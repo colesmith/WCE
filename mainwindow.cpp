@@ -20,7 +20,11 @@ void MainWindow::on_action_open_file_triggered()
 {
     // QFileDialog * fileDlg = new QFileDialog(this,Qt::Popup);
     QString path = QFileDialog::getOpenFileName(this,
-            tr("Open Text"), "C:/", tr("Image Files (*.txt *.md *.html)"));
+            tr("Open Text"), "C:/", tr("TextFiles (*.txt *.md *.html);;All(*);;"));
+
+    if (path.isEmpty())
+        return ;
+
     QFile * file = new QFile(path);
     if (! file->open(QIODevice::ReadOnly | QIODevice::Text)) {
         QMessageBox::information(this, "Open Error", "文件打开错误");
